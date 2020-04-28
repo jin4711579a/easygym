@@ -22,12 +22,6 @@ import android.os.Bundle;
 import com.xuexiang.easygym.core.BaseActivity;
 import com.xuexiang.easygym.fragment.MainFragment;
 
-/**
- * 程序入口，空壳容器
- *
- * @author xuexiang
- * @since 2019-07-07 23:53
- */
 public class MainActivity extends BaseActivity {
 
     @Override
