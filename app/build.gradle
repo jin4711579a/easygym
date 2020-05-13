@@ -10,7 +10,7 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        applicationId "com.xuexiang.templateproject"
+        applicationId "com.libenli.easygym"
         minSdkVersion 17
         targetSdkVersion build_versions.target_sdk
         versionCode 1
@@ -101,6 +101,44 @@ dependencies {
 
     //美团多渠道打包
     implementation 'com.meituan.android.walle:library:1.1.6'
+
+    compile 'com.github.devlight.shadowlayout:library:1.0.2'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+    //下拉刷新
+    implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-header:1.1.5'
+    implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-layout:1.1.5'
+
+    //版本更新
+    implementation 'com.github.xuexiangjys:XUpdate:1.1.4'
+    implementation 'com.zhy:okhttputils:2.6.2'
+
+    //PictureSelector图片选择
+    implementation 'com.github.xuexiangjys.PictureSelector:picture-core:1.0.5'
+    implementation files('libs\\tbs_sdk_thirdapp_v4.3.0.1072_43646_sharewithdownloadwithfile_withoutGame_obfs_20190429_175122.jar')
+
+    //WebView
+    implementation 'com.github.xuexiangjys.AgentWeb:agentweb-core:1.0.0'
+    implementation 'com.github.xuexiangjys.AgentWeb:agentweb-download:1.0.0'//选填
+    implementation 'com.github.xuexiangjys.AgentWeb:agentweb-filechooser:1.0.0'//选填
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+
+    //弹性布局
+    implementation 'com.google.android:flexbox:0.3.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+
+    //RxUtil2
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    implementation 'com.github.xuexiangjys:CalendarExaple:1.0.1'
+
+    //Android图表库
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 
 //x-library依赖脚本

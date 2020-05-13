@@ -13,4 +13,12 @@
     <color name="toast_warning_color" tools:ignore="PrivateResource">@color/xui_config_color_waring</color>
     <color name="toast_normal_tint_color" tools:ignore="PrivateResource">#353A3E</color>
 
+    <color name="green_btn_color_normal">#2BCFB8</color>
+    <color name="green_btn_color_disable">#CCCCCC</color>
+    <color name="green_btn_color_pressed">#05bca2</color>
+
+    <color name="app_color_theme_1">#EF5362</color> <!-- Grapefruit -->
+
+    <color name="color_f4">#F4F4F4</color>
+
 </resources>

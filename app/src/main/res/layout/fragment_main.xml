@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2019 xuexiangjys(xuexiangjys@163.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  ~
+  -->
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start"
+    android:background="#ffffff">
+    
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_show_slide"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_expand_snap_helper"
+                android:layout_gravity="start"
+                android:padding="8dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_schedule"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_expand_snap_helper"
+                android:layout_marginStart="10dp"
+                android:padding="8dp"
+                android:layout_gravity="end"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.xuexiang.xui.widget.progress.CircleProgressView
+                android:id="@+id/progressView_circle_main"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                app:cpv_animate_type="AccelerateDecelerateInterpolator"
+                app:cpv_circle_broken="true"
+                app:cpv_end_color="#00EEFA"
+                app:cpv_end_progress="98"
+                app:cpv_isFilled="false"
+                app:cpv_isTracked="true"
+                app:cpv_progress_duration="500"
+                app:cpv_progress_textVisibility="false"
+                app:cpv_start_color="#0052a3"
+                app:cpv_start_progress="0"
+                app:cpv_track_color="#eeeeee"
+                app:cpv_track_width="8dp"
+                app:cpv_progress_width="5dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="7dp">
+
+                <TextView
+                    android:id="@+id/progress_text_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="40sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|bottom">
+
+                <TextView
+                    android:id="@+id/tv_target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100 kg"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="今日目标"
+                    android:textColor="#777777"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.gigamole.library.ShadowLayout
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_marginStart="20dp"
+                app:sl_shadowed="true"
+                app:sl_shadow_angle="90"
+                app:sl_shadow_radius="2dp"
+                app:sl_shadow_distance="1dp"
+                app:sl_shadow_color="#777">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/white_rectangle"/>
+            </com.gigamole.library.ShadowLayout>
+
+            <com.gigamole.library.ShadowLayout
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_marginEnd="20dp"
+                app:sl_shadowed="true"
+                app:sl_shadow_angle="90"
+                app:sl_shadow_radius="2dp"
+                app:sl_shadow_distance="1dp"
+                app:sl_shadow_color="#777"
+                android:layout_gravity="right" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/white_rectangle"/>
+            </com.gigamole.library.ShadowLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <com.gigamole.library.ShadowLayout
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_marginStart="20dp"
+                app:sl_shadowed="true"
+                app:sl_shadow_angle="90"
+                app:sl_shadow_radius="2dp"
+                app:sl_shadow_distance="1dp"
+                app:sl_shadow_color="#777">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/white_rectangle"/>
+            </com.gigamole.library.ShadowLayout>
+            
+            <com.gigamole.library.ShadowLayout
+                android:layout_width="145dp"
+                android:layout_height="145dp"
+                android:layout_marginEnd="20dp"
+                app:sl_shadowed="true"
+                app:sl_shadow_angle="90"
+                app:sl_shadow_radius="2dp"
+                app:sl_shadow_distance="1dp"
+                app:sl_shadow_color="#777"
+                android:layout_gravity="right" >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/white_rectangle"/>
+            </com.gigamole.library.ShadowLayout>
+
+        </FrameLayout>
+
+        <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+            style="@style/RoundButton.Auto"
+            android:width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="开始锻炼"
+            android:textColor="@color/xui_default_round_btn_white_text"
+            app:rb_backgroundColor="@color/xui_round_btn_green_bg"
+            app:rb_isRadiusAdjustBounds="true"/>
+
+    </LinearLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="220dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:padding="20dp"
+        app:menu="@menu/menu_drawer" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

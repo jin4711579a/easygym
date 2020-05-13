@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">TemplateSimpleProject</string>
+    <string name="app_name">easygym</string>
+
+    <string name="lab_yes">是</string>
+    <string name="lab_no">否</string>
+
+    <string name="lab_open_third_app">是否允许页面打开第三方应用?</string>
+
+    <string name="hint_please_input_name">请输入姓名</string>
+    <string name="hint_please_input_height">请输入身高</string>
+    <string name="hint_please_input_weight">请输入体重</string>
+    <string name="hint_please_input_target">请输入目标重量</string>
 </resources>

@@ -37,7 +37,7 @@ public class EmptyFragment extends BaseFragment {
      */
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_empty;
+        return R.layout.fragment_main;
     }
 
     /**
