@@ -91,7 +91,7 @@
         android:layout_marginTop="35dp"
         android:text="关闭"
         android:textColor="@color/xui_default_round_btn_white_text"
-        app:rb_backgroundColor="@color/xui_round_btn_green_bg"
+        app:rb_backgroundColor="@color/colorPrimary"
         app:rb_isRadiusAdjustBounds="true"/>
 
 

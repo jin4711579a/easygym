@@ -215,7 +215,7 @@
             android:layout_marginTop="20dp"
             android:text="开始锻炼"
             android:textColor="@color/xui_default_round_btn_white_text"
-            app:rb_backgroundColor="@color/xui_round_btn_green_bg"
+            app:rb_backgroundColor="@color/colorPrimary"
             app:rb_isRadiusAdjustBounds="true"/>
 
     </LinearLayout>

@@ -77,7 +77,7 @@
             android:layout_gravity="center"
             android:text="保存"
             android:textColor="@color/xui_default_round_btn_white_text"
-            app:rb_backgroundColor="@color/xui_round_btn_green_bg"
+            app:rb_backgroundColor="@color/colorPrimary"
             app:rb_isRadiusAdjustBounds="true"/>
 
     </FrameLayout>

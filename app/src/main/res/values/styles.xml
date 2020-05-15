@@ -60,4 +60,9 @@
         <item name="actionBarStyle">@style/ActionBarStyle</item>
     </style>
 
+    <!--窗体背景，这个背景能在第一时间显示, 避免启动时白屏，黑屏问题-->
+    <style name="XUITheme.Launch.Demo">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
 </resources>
