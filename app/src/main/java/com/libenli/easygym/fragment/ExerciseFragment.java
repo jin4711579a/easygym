@@ -49,7 +49,6 @@ public class ExerciseFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                Log.e("blemain", "接收到数据！！！！");
                 displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
             }
         }
