@@ -128,7 +128,6 @@ public class BluetoothLeService extends Service {
                                             BluetoothGattCharacteristic characteristic) {
             Log.e("blemain", "onCharacteristicRead");
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
-
         }
     };
 
