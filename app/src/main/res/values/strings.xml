@@ -10,4 +10,8 @@
     <string name="hint_please_input_height">请输入身高</string>
     <string name="hint_please_input_weight">请输入体重</string>
     <string name="hint_please_input_target">请输入目标重量</string>
+
+    <string name="connecting_text">连接中&#8230;</string>
+    <string name="connected_text">连接成功！</string>
+    <string name="connection_error_text">连接失败！</string>
 </resources>

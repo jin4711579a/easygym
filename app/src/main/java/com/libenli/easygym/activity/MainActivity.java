@@ -17,17 +17,67 @@
 
 package com.libenli.easygym.activity;
 
+import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 
+import com.libenli.easygym.MyApp;
 import com.libenli.easygym.core.BaseActivity;
 import com.libenli.easygym.fragment.MainFragment;
+import com.libenli.easygym.model.MyDevice;
+import com.libenli.easygym.utils.XToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
+
+    private final static String TAG = MainActivity.class.getSimpleName();
+
+    public BluetoothLeService mBluetoothLeService;
+
+    public List<MyDevice> connectingDevices;
+
+    public boolean mConnected = false;
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+            if (!mBluetoothLeService.initialize()) {
+                XToastUtils.toast("Unable to initialize Bluetooth");
+                finish();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mBluetoothLeService = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        connectingDevices = new ArrayList<>();
+
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
         openPage(MainFragment.class);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        Log.e("blemain", "destroy!!!!!");
+        mBluetoothLeService = null;
+    }
 }

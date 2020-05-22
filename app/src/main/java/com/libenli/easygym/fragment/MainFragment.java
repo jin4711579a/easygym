@@ -32,15 +32,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.libenli.easygym.R;
+import com.libenli.easygym.activity.MainActivity;
 import com.libenli.easygym.core.BaseFragment;
 import com.libenli.easygym.db.DBHelper;
 import com.libenli.easygym.db.DBManager;
 import com.libenli.easygym.model.Info;
 import com.libenli.easygym.utils.SettingSPUtils;
 import com.libenli.easygym.utils.XToastUtils;
+import com.squareup.haha.perflib.Main;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.enums.CoreAnim;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
+import com.xuexiang.xui.widget.button.roundbutton.RoundButton;
 import com.xuexiang.xui.widget.dialog.materialdialog.DialogAction;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
@@ -79,6 +82,9 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
     @BindView(R.id.iv_schedule)
     AppCompatImageView ivSchedule;
 
+    @BindView(R.id.btn_begin)
+    RoundButton btnBegin;
+
     private View headerLayout;
 
     private Info info;
@@ -113,6 +119,12 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
         List<Info> infoList = DBManager.getInstance().queryInfo();
         if (infoList.size() > 0) {
             info = infoList.get(0);
+        }
+
+        if (((MainActivity)mActivity).mConnected) {
+            btnBegin.setEnabled(true);
+        } else {
+            btnBegin.setEnabled(false);
         }
 
         headerLayout = navView.inflateHeaderView(R.layout.layout_nav_header);
@@ -156,7 +168,7 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
         navView.setNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.nav_equipment:
-                    XToastUtils.toast("点击了:" + menuItem.getTitle());
+                    openPage(DevicesFragment.class);
                     break;
 
                 case R.id.nav_target:
@@ -178,6 +190,13 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
             @Override
             public void onClick(View v) {
                 openPage(ScheduleFragment.class);
+            }
+        });
+
+        btnBegin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPage(ExerciseFragment.class);
             }
         });
     }

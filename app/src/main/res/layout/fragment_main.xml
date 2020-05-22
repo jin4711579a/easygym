@@ -209,10 +209,12 @@
         </FrameLayout>
 
         <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+            android:id="@+id/btn_begin"
             style="@style/RoundButton.Auto"
             android:width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
+            android:enabled="false"
             android:text="开始锻炼"
             android:textColor="@color/xui_default_round_btn_white_text"
             app:rb_backgroundColor="@color/colorPrimary"

@@ -17,10 +17,13 @@
 
 package com.libenli.easygym.utils;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.xuexiang.xutil.XUtil;
 import com.xuexiang.xutil.data.BaseSPUtil;
+
+import java.util.List;
 
 /**
  * SharedPreferences管理工具基类
@@ -60,6 +63,8 @@ public class SettingSPUtils extends BaseSPUtil {
     private final String IS_USE_CUSTOM_THEME_KEY = "is_use_custom_theme_key";
 
     private final String TARGET_WEIGHT = "target_weight";
+
+    private final String JSON_DEVICES = "json_devices";
 
 
     /**
@@ -103,5 +108,12 @@ public class SettingSPUtils extends BaseSPUtil {
         putString(TARGET_WEIGHT, weight);
     }
 
+    public String getDevices() {
+        return getString(JSON_DEVICES, "");
+    }
+
+    public void setDevices(String jsonDevices) {
+        putString(JSON_DEVICES, jsonDevices);
+    }
 
 }

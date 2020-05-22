@@ -21,4 +21,8 @@
 
     <color name="color_f4">#F4F4F4</color>
 
+    <color name="color_bg_loading">#dc858585</color>
+    <color name="color_bg_success">#dc82ce32</color>
+    <color name="color_bg_error">#dcd84315</color>
+
 </resources>
