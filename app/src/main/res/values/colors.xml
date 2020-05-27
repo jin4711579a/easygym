@@ -25,4 +25,11 @@
     <color name="color_bg_success">#dc82ce32</color>
     <color name="color_bg_error">#dcd84315</color>
 
+    <color name="menu_red_normal">#FF0000</color>
+    <color name="menu_red_pressed">#FF6666</color>
+    <color name="menu_green_normal">#37C000</color>
+    <color name="menu_green_pressed">#30A070</color>
+    <color name="menu_purple_normal">#9932CC</color>
+    <color name="menu_purple_pressed">#9F79EE</color>
+
 </resources>

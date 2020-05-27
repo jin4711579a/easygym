@@ -15,7 +15,7 @@
  *
  */
 
-package com.libenli.easygym.activity;
+package com.libenli.easygym.model;
 
 import java.util.HashMap;
 

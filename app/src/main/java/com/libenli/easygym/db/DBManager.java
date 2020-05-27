@@ -22,9 +22,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.libenli.easygym.model.Info;
+import com.libenli.easygym.model.Schedule;
+import com.libenli.easygym.utils.SettingSPUtils;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -217,6 +221,93 @@ public class DBManager {
 
         return true;
     }
+
+    public List<Schedule> queryScheduleByDate(String date) {
+        List<Schedule> scheduleList = new ArrayList<>();
+        Cursor cursor = null;
+
+        try {
+            if (mDBHelper == null) {
+                return scheduleList;
+            }
+            SQLiteDatabase db = mDBHelper.getReadableDatabase();
+            String where = "date = ? ";
+            String[] whereValue = {date};
+            cursor = db.query(DBHelper.TABLE_SCHEDULE, null, where, whereValue, null, null, null);
+            while (cursor != null && cursor.getCount() > 0 && cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndex("_id"));
+                String date1 = cursor.getString(cursor.getColumnIndex("date"));
+                int time = cursor.getInt(cursor.getColumnIndex("time"));
+                int count = cursor.getInt(cursor.getColumnIndex("count"));
+                float weight = cursor.getFloat(cursor.getColumnIndex("weight"));
+                float calories = cursor.getFloat(cursor.getColumnIndex("calories"));
+                int complete = cursor.getInt(cursor.getColumnIndex("complete"));
+
+                Schedule schedule = new Schedule(id, date1, time, count, weight, calories, complete);
+                scheduleList.add(schedule);
+            }
+        } finally {
+            closeCursor(cursor);
+        }
+
+        return scheduleList;
+    }
+
+    public boolean addSchedule(Schedule schedule) {
+        if (mDBHelper == null) {
+            return false;
+        }
+
+        try {
+            mDatabase = mDBHelper.getWritableDatabase();
+            beginTransaction(mDatabase);
+
+            List<Schedule> temp = queryScheduleByDate(schedule.getDate());
+
+            if (temp.size() > 0) {
+                Log.e("blemain", "schedule 已经有了");
+                String target = SettingSPUtils.getInstance().getTarget();
+                ContentValues cv = new ContentValues();
+                cv.put("time", schedule.getTime() + temp.get(0).getTime());
+                cv.put("count", schedule.getCount() + temp.get(0).getCount());
+                cv.put("weight", schedule.getWeight() + temp.get(0).getWeight());
+                cv.put("calories", schedule.getCalories() + temp.get(0).getCalories());
+                cv.put("complete", schedule.getWeight() + temp.get(0).getWeight() > Float.parseFloat(target) ? 1 : 0);
+
+                String where = "date = ? ";
+                String[] whereValue = {schedule.getDate()};
+
+                long id = mDatabase.update(DBHelper.TABLE_SCHEDULE, cv, where, whereValue);
+
+                if (id < 0) {
+                    return false;
+                }
+                setTransactionSuccessful(mDatabase);
+            } else {
+                Log.e("blemain", "schedule 需要添加");
+                ContentValues cv = new ContentValues();
+                cv.put("date", schedule.getDate());
+                cv.put("time", schedule.getTime());
+                cv.put("count", schedule.getCount());
+                cv.put("weight", schedule.getWeight());
+                cv.put("calories", schedule.getCalories());
+                cv.put("complete", 0);
+
+                long id = mDatabase.insert(DBHelper.TABLE_SCHEDULE, null, cv);
+
+                if (id < 0) {
+                    return false;
+                }
+                setTransactionSuccessful(mDatabase);
+            }
+
+        } finally {
+            endTransaction(mDatabase);
+        }
+
+        return true;
+    }
+
 
 
 

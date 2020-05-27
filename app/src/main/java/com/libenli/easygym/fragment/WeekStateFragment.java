@@ -19,6 +19,7 @@ package com.libenli.easygym.fragment;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -41,6 +42,7 @@ import com.libenli.easygym.utils.XToastUtils;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.enums.CoreAnim;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -195,5 +197,16 @@ public class WeekStateFragment extends BaseChartFragment implements OnChartValue
     @Override
     public void onNothingSelected() {
 
+    }
+
+    private List<String> getWeekDate() {
+        List<String> weekDate = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        int firstDayOfWeek = calendar.getFirstDayOfWeek();
+        for (int i = 0; i < 7; i ++) {
+            calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek + i);
+            weekDate.add(new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime()));
+        }
+        return weekDate;
     }
 }

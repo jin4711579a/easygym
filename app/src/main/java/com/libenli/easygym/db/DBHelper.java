@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         StringBuilder scheSql = new StringBuilder();
         scheSql.append(CREATE_TABLE_START_SQL).append(TABLE_SCHEDULE).append(" ( ");
         scheSql.append(" _id").append(CREATE_TABLE_PRIMIRY_SQL);
-        scheSql.append(" date").append(" date ,");
+        scheSql.append(" date").append(" varchar(32) default \"\" ,");
         scheSql.append(" time").append(" integer ,");
         scheSql.append(" count").append(" integer ,");
         scheSql.append(" weight").append(" real ,");

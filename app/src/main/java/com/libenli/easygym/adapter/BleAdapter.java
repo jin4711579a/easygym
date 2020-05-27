@@ -17,9 +17,7 @@
 
 package com.libenli.easygym.adapter;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +25,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.libenli.easygym.R;
-import com.libenli.easygym.activity.BluetoothLeService;
+import com.libenli.easygym.service.BluetoothLeService;
 import com.libenli.easygym.model.MyDevice;
-import com.libenli.easygym.utils.XToastUtils;
 import com.xuexiang.xui.widget.button.roundbutton.RoundButton;
 
 import java.util.List;
@@ -91,7 +88,7 @@ public class BleAdapter extends BaseAdapter {
         viewHolder.btnDisconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                service.disconnect();
+                service.disconnect(device.getAddressData());
             }
         });
 

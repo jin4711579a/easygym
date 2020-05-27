@@ -67,8 +67,8 @@
 
             <com.xuexiang.xui.widget.progress.CircleProgressView
                 android:id="@+id/progressView_circle_main"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 app:cpv_animate_type="AccelerateDecelerateInterpolator"
@@ -96,7 +96,7 @@
                     android:id="@+id/progress_text_main"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00"
+                    android:text="0.0"
                     android:textColor="@color/colorAccent"
                     android:textSize="40sp" />
             </LinearLayout>
@@ -127,86 +127,126 @@
 
         </FrameLayout>
 
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
 
-            <com.gigamole.library.ShadowLayout
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:layout_marginStart="20dp"
-                app:sl_shadowed="true"
-                app:sl_shadow_angle="90"
-                app:sl_shadow_radius="2dp"
-                app:sl_shadow_distance="1dp"
-                app:sl_shadow_color="#777">
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
-                <ImageView
+                <com.gigamole.library.ShadowLayout
                     android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:sl_shadowed="true"
+                    app:sl_shadow_angle="90"
+                    app:sl_shadow_radius="2dp"
+                    app:sl_shadow_distance="1dp"
+                    app:sl_shadow_color="#777">
+
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="145dp"
+                        android:layout_height="145dp"
+                        android:src="@drawable/white_rectangle"/>
+                </com.gigamole.library.ShadowLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/white_rectangle"/>
-            </com.gigamole.library.ShadowLayout>
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal">
 
-            <com.gigamole.library.ShadowLayout
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:layout_marginEnd="20dp"
-                app:sl_shadowed="true"
-                app:sl_shadow_angle="90"
-                app:sl_shadow_radius="2dp"
-                app:sl_shadow_distance="1dp"
-                app:sl_shadow_color="#777"
-                android:layout_gravity="right" >
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_timer" />
 
-                <ImageView
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:text="0"
+                        android:textSize="25sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="mins"
+                        android:textColor="#ccc"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.gigamole.library.ShadowLayout
                     android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:sl_shadowed="true"
+                    app:sl_shadow_angle="90"
+                    app:sl_shadow_radius="2dp"
+                    app:sl_shadow_distance="1dp"
+                    app:sl_shadow_color="#777">
+
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="145dp"
+                        android:layout_height="145dp"
+                        android:src="@drawable/white_rectangle"/>
+                </com.gigamole.library.ShadowLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/white_rectangle"/>
-            </com.gigamole.library.ShadowLayout>
+                    android:orientation="vertical"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal">
 
-        </FrameLayout>
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_timer" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/tv_calories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:text="0"
+                        android:textSize="25sp"/>
 
-            <com.gigamole.library.ShadowLayout
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:layout_marginStart="20dp"
-                app:sl_shadowed="true"
-                app:sl_shadow_angle="90"
-                app:sl_shadow_radius="2dp"
-                app:sl_shadow_distance="1dp"
-                app:sl_shadow_color="#777">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="cals"
+                        android:textColor="#ccc"
+                        android:textSize="12sp"/>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/white_rectangle"/>
-            </com.gigamole.library.ShadowLayout>
-            
-            <com.gigamole.library.ShadowLayout
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:layout_marginEnd="20dp"
-                app:sl_shadowed="true"
-                app:sl_shadow_angle="90"
-                app:sl_shadow_radius="2dp"
-                app:sl_shadow_distance="1dp"
-                app:sl_shadow_color="#777"
-                android:layout_gravity="right" >
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/white_rectangle"/>
-            </com.gigamole.library.ShadowLayout>
 
-        </FrameLayout>
+            </FrameLayout>
+
+            </LinearLayout>
 
         <com.xuexiang.xui.widget.button.roundbutton.RoundButton
             android:id="@+id/btn_begin"

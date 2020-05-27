@@ -17,7 +17,6 @@
 
 package com.libenli.easygym.activity;
 
-import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -25,10 +24,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.libenli.easygym.MyApp;
 import com.libenli.easygym.core.BaseActivity;
 import com.libenli.easygym.fragment.MainFragment;
 import com.libenli.easygym.model.MyDevice;
+import com.libenli.easygym.service.BluetoothLeService;
 import com.libenli.easygym.utils.XToastUtils;
 
 import java.util.ArrayList;

@@ -17,6 +17,8 @@
 
 package com.libenli.easygym.model;
 
+import android.view.View;
+
 import java.util.List;
 
 public class MyDevice {
@@ -44,5 +46,14 @@ public class MyDevice {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public boolean include(List<MyDevice> devices) {
+        for (MyDevice deviceTemp : devices) {
+            if (deviceTemp.getAddressData().equals(address)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

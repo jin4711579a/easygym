@@ -43,7 +43,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
 
-        <service android:name="com.libenli.easygym.activity.BluetoothLeService" android:enabled="true"/>
+        <service android:name="com.libenli.easygym.service.BluetoothLeService" android:enabled="true"/>
 
         <!--fragment的页面容器-->
         <activity

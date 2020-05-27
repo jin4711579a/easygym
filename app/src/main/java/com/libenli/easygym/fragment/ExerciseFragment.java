@@ -21,12 +21,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.libenli.easygym.R;
-import com.libenli.easygym.activity.BluetoothLeService;
+import com.libenli.easygym.service.BluetoothLeService;
 import com.libenli.easygym.activity.MainActivity;
 import com.libenli.easygym.core.BaseFragment;
 import com.xuexiang.xpage.annotation.Page;
@@ -49,7 +48,7 @@ public class ExerciseFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA), intent.getStringExtra(BluetoothLeService.EXTRA_ADDRESS));
             }
         }
     };
@@ -86,9 +85,9 @@ public class ExerciseFragment extends BaseFragment {
         return intentFilter;
     }
 
-    private void displayData(String data) {
+    private void displayData(String data, String address) {
         if (data != null) {
-            tvValue.append(data);
+            tvValue.append(data + " " + address);
             tvValue.append("\n");
         }
     }

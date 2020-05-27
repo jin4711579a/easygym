@@ -19,6 +19,7 @@ package com.libenli.easygym.fragment;
 
 import android.os.Handler;
 import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ import com.libenli.easygym.core.BaseFragment;
 import com.libenli.easygym.db.DBHelper;
 import com.libenli.easygym.db.DBManager;
 import com.libenli.easygym.model.Info;
+import com.libenli.easygym.model.Schedule;
 import com.libenli.easygym.utils.SettingSPUtils;
 import com.libenli.easygym.utils.XToastUtils;
 import com.squareup.haha.perflib.Main;
@@ -53,6 +55,9 @@ import com.xuexiang.xutil.common.ClickUtils;
 import com.xuexiang.xutil.tip.ToastUtils;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,17 +84,28 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
     @BindView(R.id.progress_text_main)
     TextView progress_text_main;
 
+    @BindView(R.id.iv_show_slide)
+    AppCompatImageView ivSlide;
+
     @BindView(R.id.iv_schedule)
     AppCompatImageView ivSchedule;
 
     @BindView(R.id.btn_begin)
     RoundButton btnBegin;
 
+    @BindView(R.id.tv_time)
+    TextView tv_time;
+
+    @BindView(R.id.tv_calories)
+    TextView tv_calories;
+
     private View headerLayout;
 
     private Info info;
 
     private int target = Integer.parseInt(SettingSPUtils.getInstance().getTarget());
+
+    private float todayKG = 0;
 
     @Override
     protected TitleBar initTitle() {
@@ -116,6 +132,7 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
     protected void initViews() {
         // 初始化数据库
         DBManager.getInstance().init(mActivity.getApplicationContext());
+
         List<Info> infoList = DBManager.getInstance().queryInfo();
         if (infoList.size() > 0) {
             info = infoList.get(0);
@@ -147,15 +164,31 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
         tvTarget.setText(SettingSPUtils.getInstance().getTarget() + " kg");
 
         // 设置进度条，后期按实际情况来显示
-        float todayKG = 27;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        List<Schedule> schedules = DBManager.getInstance().queryScheduleByDate(simpleDateFormat.format(date));
+
+        if (schedules.size() > 0) {
+            todayKG = schedules.get(0).getWeight();
+            tv_time.setText(String.valueOf(schedules.get(0).getTime()));
+            tv_calories.setText(String.valueOf(schedules.get(0).getCalories()));
+        }
+
         progressViewCircleMain.setProgressViewUpdateListener(this);
-        progressViewCircleMain.setEndProgress(todayKG / target * 100);
+        progressViewCircleMain.setEndProgress(todayKG < target ? todayKG / target * 100 : 100);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressViewCircleMain.startProgressAnimation();
+            }
+        }, 1000);
     }
 
     @Override
     protected void initListeners() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        autoRefresh();
 
         RadiusImageView imageView = headerLayout.findViewById(R.id.img_icon);
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +223,14 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
             @Override
             public void onClick(View v) {
                 openPage(ScheduleFragment.class);
+            }
+        });
+
+        ivSlide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBManager.getInstance().addSchedule(new Schedule("2020-05-26", 100, 20, 80, 100));
+                XToastUtils.toast("添加成功！！！");
             }
         });
 
@@ -231,12 +272,22 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
                 .show();
     }
 
-    private void autoRefresh() {
-        swipeRefreshLayout.setRefreshing(true);
-        refreshData();
+    private void loadData() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        List<Schedule> schedules = DBManager.getInstance().queryScheduleByDate(simpleDateFormat.format(date));
+
+        if (schedules.size() > 0) {
+            todayKG = schedules.get(0).getWeight();
+            tv_time.setText(String.valueOf(schedules.get(0).getTime()));
+            tv_calories.setText(String.valueOf(schedules.get(0).getCalories()));
+        }
+
+        progressViewCircleMain.setEndProgress(todayKG < target ? todayKG / target * 100 : 100);
     }
 
     private void refreshData() {
+        loadData();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -269,7 +320,11 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
 
     @Override
     public void onCircleProgressUpdate(View view, float progress) {
-        progress_text_main.setText(String.valueOf(Math.floor(progress / 100 * target)));
+        if (target >= todayKG) {
+            progress_text_main.setText(String.valueOf(Math.floor(progress / 100 * target)));
+        } else {
+            progress_text_main.setText(String.valueOf(Math.floor(progress / 100 * todayKG)));
+        }
     }
 
     @Override

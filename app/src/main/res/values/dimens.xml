@@ -20,4 +20,7 @@
     <dimen name="design_navigation_icon_padding" tools:override="true">10dp</dimen>
 
     <dimen name="navigation_icon_size">8dp</dimen>
+
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
 </resources>

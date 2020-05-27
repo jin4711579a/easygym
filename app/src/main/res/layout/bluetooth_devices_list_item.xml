@@ -63,25 +63,41 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
-            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-                android:id="@+id/btn_connect"
+            <FrameLayout
                 android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="连接"
-                android:textColor="@color/xui_default_round_btn_white_text"
-                app:rb_backgroundColor="@color/colorPrimary"
-                app:rb_isRadiusAdjustBounds="true"/>
+                android:layout_height="30dp">
 
-            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-                android:id="@+id/btn_disconnect"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:gravity="center"
-                android:text="断开连接"
-                android:textColor="@color/xui_default_round_btn_white_text"
-                app:rb_backgroundColor="@color/colorPrimary"
-                app:rb_isRadiusAdjustBounds="true"/>
+                <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                    android:id="@+id/btn_connect"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="连接"
+                    android:textColor="@color/xui_default_round_btn_white_text"
+                    android:textSize="15sp"
+                    app:rb_backgroundColor="@color/colorPrimary"
+                    app:rb_isRadiusAdjustBounds="true" />
+
+                <com.xuexiang.xui.widget.progress.loading.MiniLoadingView
+                    android:id="@+id/loading_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+
+                <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                    android:id="@+id/btn_disconnect"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="断开连接"
+                    android:textSize="15sp"
+                    android:textColor="@color/xui_default_round_btn_white_text"
+                    app:rb_backgroundColor="@color/xui_btn_gray_normal_color"
+                    app:rb_isRadiusAdjustBounds="true"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 
