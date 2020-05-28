@@ -17,7 +17,6 @@
 
 package com.libenli.easygym.model;
 
-import java.sql.Date;
 
 public class Schedule {
     private int id;

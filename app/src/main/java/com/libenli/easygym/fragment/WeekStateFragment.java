@@ -38,6 +38,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Utils;
 import com.libenli.easygym.R;
 import com.libenli.easygym.chart.BaseChartFragment;
+import com.libenli.easygym.db.DBManager;
+import com.libenli.easygym.model.Schedule;
 import com.libenli.easygym.utils.XToastUtils;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpage.enums.CoreAnim;
@@ -144,10 +146,16 @@ public class WeekStateFragment extends BaseChartFragment implements OnChartValue
 
     @Override
     protected void setChartData(int count, float range) {
+        List<String> weekDate = getWeekDate();
+
         List<Entry> values = new ArrayList<>();
         //设置数据源
         for (int i = 0; i < count; i++) {
-            float val = (float) (Math.random() * range);
+            List<Schedule> schedules = DBManager.getInstance().queryScheduleByDate(weekDate.get(i));
+            float val = 0;
+            if (schedules.size() > 0) {
+                val = schedules.get(0).getWeight();
+            }
             values.add(new Entry(i, val));
         }
         LineDataSet set1;

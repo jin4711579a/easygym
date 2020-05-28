@@ -272,7 +272,7 @@ public class DBManager {
                 cv.put("count", schedule.getCount() + temp.get(0).getCount());
                 cv.put("weight", schedule.getWeight() + temp.get(0).getWeight());
                 cv.put("calories", schedule.getCalories() + temp.get(0).getCalories());
-                cv.put("complete", schedule.getWeight() + temp.get(0).getWeight() > Float.parseFloat(target) ? 1 : 0);
+                cv.put("complete", (schedule.getWeight() + temp.get(0).getWeight()) > Float.parseFloat(target) ? 1 : 0);
 
                 String where = "date = ? ";
                 String[] whereValue = {schedule.getDate()};

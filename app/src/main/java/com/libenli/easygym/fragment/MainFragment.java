@@ -172,6 +172,8 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
             todayKG = schedules.get(0).getWeight();
             tv_time.setText(String.valueOf(schedules.get(0).getTime()));
             tv_calories.setText(String.valueOf(schedules.get(0).getCalories()));
+
+            XToastUtils.toast(String.valueOf(schedules.get(0).getComplete()));
         }
 
         progressViewCircleMain.setProgressViewUpdateListener(this);
@@ -229,7 +231,7 @@ public class MainFragment extends BaseFragment implements ClickUtils.OnClick2Exi
         ivSlide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBManager.getInstance().addSchedule(new Schedule("2020-05-26", 100, 20, 80, 100));
+                DBManager.getInstance().addSchedule(new Schedule("2020-05-28", 100, 20, 120, 100));
                 XToastUtils.toast("添加成功！！！");
             }
         });

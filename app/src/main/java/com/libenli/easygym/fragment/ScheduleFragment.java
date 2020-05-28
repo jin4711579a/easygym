@@ -18,9 +18,11 @@
 package com.libenli.easygym.fragment;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codbking.calendar.CaledarAdapter;
@@ -29,6 +31,8 @@ import com.codbking.calendar.CalendarDateView;
 import com.codbking.calendar.CalendarView;
 import com.libenli.easygym.R;
 import com.libenli.easygym.core.BaseFragment;
+import com.libenli.easygym.db.DBManager;
+import com.libenli.easygym.model.Schedule;
 import com.libenli.easygym.utils.XToastUtils;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 import com.xuexiang.xpage.annotation.Page;
@@ -36,8 +40,11 @@ import com.xuexiang.xpage.enums.CoreAnim;
 import com.xuexiang.xui.utils.DensityUtils;
 import com.xuexiang.xui.utils.ThemeUtils;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheetItemView;
 
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -76,6 +83,7 @@ public class ScheduleFragment extends BaseFragment {
             @Override
             public View getView(View convertView, ViewGroup parentView, CalendarDate calendarDate) {
                 TextView textView;
+                ImageView imageView;
                 if (convertView == null) {
                     convertView = LayoutInflater.from(parentView.getContext()).inflate(R.layout.adapter_calendar_item, null);
                     ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(DensityUtils.dp2px(48), DensityUtils.dp2px(48));
@@ -83,9 +91,32 @@ public class ScheduleFragment extends BaseFragment {
                 }
 
                 textView = convertView.findViewById(R.id.tv_text);
+                imageView = convertView.findViewById(R.id.iv_bg);
                 textView.setBackgroundResource(R.drawable.bg_calendar_material_design_item);
 
                 textView.setText(String.valueOf(calendarDate.day));
+
+                String month = String.valueOf(calendarDate.month);
+                if (calendarDate.month < 10) {
+                    month = "0" + calendarDate.month;
+                }
+
+                String day = String.valueOf(calendarDate.day);
+                if (calendarDate.day < 10) {
+                    day = "0" + calendarDate.day;
+                }
+
+                String date = calendarDate.year + "-" + month + "-" + day;
+
+                Log.e("blemain", date);
+
+                List<Schedule> schedules = DBManager.getInstance().queryScheduleByDate(date);
+
+                if (schedules.size() > 0) {
+                    if (schedules.get(0).getComplete() == 1) {
+                        imageView.setBackgroundResource(R.drawable.bg_gray_circle_1);
+                    }
+                }
 
                 if (calendarDate.monthFlag != 0) {
                     convertView.setVisibility(View.INVISIBLE);
@@ -103,7 +134,25 @@ public class ScheduleFragment extends BaseFragment {
         calendar.setOnCalendarSelectedListener(new CalendarView.OnCalendarSelectedListener() {
             @Override
             public void onCalendarSelected(View view, int postion, CalendarDate date) {
-                XToastUtils.toast("选中：" + date.formatDate());
+                String today = date.formatDate();
+                List<Schedule> schedules = DBManager.getInstance().queryScheduleByDate(today);
+                if (schedules.size() > 0) {
+                    BottomSheet.BottomGridSheetBuilder builder = new BottomSheet.BottomGridSheetBuilder(getActivity());
+                    builder
+                            .addItem(R.drawable.ic_timer, String.valueOf(schedules.get(0).getTime()), 1, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, String.valueOf(schedules.get(0).getCount()), 2, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, String.valueOf(schedules.get(0).getWeight()), 3, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, String.valueOf(schedules.get(0).getCalories()), 4, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .build().show();
+                } else {
+                    BottomSheet.BottomGridSheetBuilder builder = new BottomSheet.BottomGridSheetBuilder(getActivity());
+                    builder
+                            .addItem(R.drawable.ic_timer, "0", 1, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, "0", 2, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, "0", 3, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .addItem(R.drawable.ic_timer, "0", 4, BottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                            .build().show();
+                }
             }
         });
 
